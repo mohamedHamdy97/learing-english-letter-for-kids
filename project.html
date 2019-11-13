@@ -1,0 +1,165 @@
+<html>
+    <head>
+      <title>Learn The English Letters</title>  
+        <style>
+            
+            .asd{
+                
+                font-size: 40px;
+                margin-left: 50px;
+                
+                
+                
+            }
+            #a{
+                   font-size: 60px;
+                   margin-bottom: 0px;
+            }
+            
+            #show{
+                
+               
+                margin-top: 30px;
+                margin-left: 50px;
+                
+                
+            }
+            #showimage{
+                height: 401px;
+                width: 401px;
+                margin-left: 120px;
+                color: red;
+                font-size: 55px;
+                text-align: center;
+                
+            }
+            #showimage img{
+                margin-left:50px;
+                margin-top: 50px;
+                 height: 300px;
+                width: 300px;
+                
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="asd">
+      <p id="a">Learn The English Letters</p>
+      <label>Number of letter </label><input id="in" value="" placeholder="Enter number to generate" type=number> <button id="btn">Generate</button>
+        </div>
+        <div id="show">
+          
+        </div>
+        <div id="showimage">
+          
+        </div>
+          <script>
+                var alpha=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+                var names=["Apple","Boy","Cat","Dog","Elephant","Fish","Girl","Hours","Ice_cream","Jam","Kangaroo","Lion","Monky","Nurse","Oil","Panda","Queen","Rabbit","School","Tree","Umbrella","Vagetabls","Wolf","Xylophone","Yoyo","Zombies"];
+                 var alphasign=[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
+                var images=["a.jpeg","b.jpeg","c.jpeg","d.jpg","e.jpg","f.jpg","g.jpg","h.jpg","i.jpg","j.jpg","k.jpg","l.jpg","m.jpg","n.jpg","o.jpg","p.jpg","q.jpg","r.jpg","s.jpg","t.jpg","u.jpg","v.png","w.jpg","x.jpg","y.jpg","z.jpg"];
+             
+                
+                var dv=document.getElementById("show");
+                var inp=document.getElementById("in");
+                var btn=document.getElementById("btn");
+                var dv3=document.getElementById("showimage");
+               var x=Math.floor(Math.random()*(26));
+               var img=null;
+               var flag=0;
+               var  p_img=null;
+               var  p_text=null;
+               
+                btn.addEventListener("click",function(){
+                    if(flag==0){
+                    if(parseInt(inp.value)>26||parseInt(inp.value)<0){
+                        
+                        alert("Number must be between 1 to 26");
+                        window.location.reload(true);
+                    }
+                    else{
+                 for(var i=0;i<parseInt(inp.value);i++)
+                 {
+                 while(true)
+                      {
+                       if(alphasign[x]==-1)
+                         {
+                            
+                           alphasign[x]++;
+                           break;
+                         }
+                           else
+                           {
+                              var x=Math.floor(Math.random()*(26));
+                           }
+                       }
+                 var d=[];
+                    d[i]=document.createElement("button");
+                    var text=document.createTextNode(alpha[x]);
+                    d[i].appendChild(text);
+               dv.appendChild(d[i]);
+               d[i].addEventListener("click",function(e){
+                
+                  
+                   if(img!=null&&p_img!=null&& p_text!=null)
+             
+                {dv3.removeChild(img);
+                p_img.removeChild(p_text);
+                dv3.removeChild(p_img);
+                img=null;
+                p_img=null;
+                p_text=null;
+                }
+             
+                img= document.createElement("img");
+           p_img= document.createElement("p");
+                for(var j=0;j<26;j++)
+                {
+                    if(e.target.textContent==alpha[j]){
+                        img.src=images[j];
+                         p_text=document.createTextNode(names[j]);
+                        break;
+                    }
+                }
+            
+              dv3.appendChild(img);
+          
+           
+            p_img.appendChild(p_text);
+            dv3.appendChild(p_img);
+              
+             
+            
+                
+                
+                });
+                    
+                 }}
+                                     
+                                  flag=1;   }
+                                     else
+                                     window.location.reload(true);
+                }
+                                     );
+               
+
+               
+                
+                
+                
+                
+                
+                
+            </script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </body>
+</html>
