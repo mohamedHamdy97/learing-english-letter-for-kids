@@ -1,0 +1,354 @@
+<html>
+    <head>
+      <title>Learn The English Letters</title>  
+        <style>
+		
+			.con
+			{
+					background-image: url("footer.jpg");
+					width: 100%;
+					height: 200px;
+			}
+        .asd{
+                   font-size: 25px;
+                    text-align: center;
+					background-image: url("header.jpg");
+					height: 130px;	
+            }
+         #a{
+                   font-size: 50px;
+                   margin-bottom: 30px;
+                    text-align: center;
+			}
+      #show{
+                    margin-top: -10px;
+                    padding: 30px;
+                    text-align: center;
+			}
+ #showimage{
+   position: relatabive;
+ 
+                    height: 401px;
+                    width: 401px;
+                    margin-top: -40px;
+                    margin-left: 450px;
+                    color: #33ffcc;
+                    font-size: 45px;
+                    text-align: center;
+			}
+#showimage img{
+					margin-left:50px;
+					margin-top: -10px;
+					height: 250px;
+					width: 300px;
+            }
+     button{
+		            margin-left: 2px;
+                    padding: 10px 40px;
+                    border-radius: 15px;
+                    font-size: 12px ;
+                    font:bold;
+                    color: black;
+                    background-color: #33ffcc;
+				    outline: none;
+				    height: 34px;
+                    margin-top: 0px;
+           }
+button.btn{
+					margin-top: 10px;            
+					border-radius: 12px;
+					background-color: #33ffcc;
+					border: none;
+					color: black;
+					text-align: center;
+					font-size: 15px ;
+					font:bold;              
+            }
+button.btn:hover{
+					font-size: 15px;
+				    border-radius: 15px;
+				    background-color: #ff00cc; /* Green */
+			    	border: none;
+					color: white;
+					text-align: center;
+            }
+          #in{
+					height: 34px;
+					border-radius: 12px;
+					background-color: #33ffcc;
+					font-size: 15px;
+					color: black;
+					text-align: center;
+					outline: none;
+		  }
+      #table{
+
+text-align: center;
+					font-size: 25px;
+					color: black;
+
+      }
+      #table td{
+        border-radius: 12px;
+text-align: center;
+background-color: #33ffcc;
+					font-size: 15px;
+					color: black;
+width: 2%;
+
+      }
+#event{
+}
+        </style>
+    </head>
+    <body>
+		
+        <div class="asd">
+                <p id="a">Learn The English Letters For Kids</p>
+                <label>Number of letter </label><input id="in" value="" placeholder="Enter number to generate" type=number> <button id="btn">Generate</button><button id="btnEvent">Show_Events</button>
+        </div>
+        <div id="show">
+		</div>
+        <div id="showimage">
+    </div>
+    <div id ="event">
+<table id="table">
+
+
+</table>
+    </div>
+		<div class="con">
+    </div>
+    <script src="jquery3.2.1.min.js"></script>
+
+          <script>
+            //function Template 
+            function objects(textContent,type,target,Date_Time){
+              this.textContent=textContent; 
+              this.type=type;
+                this.target=target;
+                this.Date_Time=Date_Time;
+            }
+
+             $("#btnEvent").on("click",function(){
+              $.ajax({
+    "type": "GET",
+    "url": "project.php",
+    "data": {"eventes":""},
+    "success": function(response){
+      $x=JSON.parse(response);
+      $("#table").append("<tr><td id="+(0)+"n colspan=4  style='font-size: 35px;'>Events</td></tr><tr><td style='background-color: #ff00cc;font-size: 25px;' id="+(0)+"t>TextContent</td><td style='background-color: #ff00cc;font-size: 25px;' id="+(0)+"n>Type</td><td style='background-color: #ff00cc;font-size: 25px;'  id="+(0)+"a>Target</td><td style='background-color: #ff00cc;font-size: 25px;' id="+(0)+"z>Date&Time</td></tr>");
+
+for(var i=0;i<$x.length;i++)
+{
+      $("#table").append("<tr><td id="+(i+1)+"t></td><td id="+(i+1)+"n></td><td id="+(i+1)+"a></td><td id="+(i+1)+"z></td></tr>");
+         $("#"+(i+1)+"t").text($x[i]["textContent"]);
+        $("#"+(i+1)+"n").text($x[i]["type"]);
+        $("#"+(i+1)+"a").text($x[i]["target"]);
+        $("#"+(i+1)+"z").text($x[i]["Date_Time"]);
+
+ // $x=response;
+ // $("#event").append($x[i]["type"]+"    "+$x[i]["target"]+" "+$x[i]["Date_Time"]+"<br> ")
+}    
+ }
+
+
+
+
+
+             }); });
+      //Timer****************************
+      $arr=[];
+      $arr2=[];
+      $arr3=[];
+      $arr4=[];
+        setInterval(function(){
+         $allload=JSON.parse(localStorage.getItem("load"));
+         $allunload=JSON.parse(localStorage.getItem("unload"));
+         $allgen=JSON.parse(localStorage.getItem("clickbtngenerate"));
+         $allalpha=JSON.parse(localStorage.getItem("clickAlphabtn"));
+
+         
+         //console.log($allload.length)
+        $.ajax({
+    "type": "POST",
+    "url": "project.php",
+    "data": {"load":JSON.stringify($allload),"unload":JSON.stringify($allunload),"clickbtngenerate":JSON.stringify($allgen),"clickAlphabtn":JSON.stringify($allalpha)},
+    "success": function(response){
+      console.log(response);
+      $arr=[];
+      $arr2=[];
+      $arr3=[];
+      $arr4=[];
+    localStorage.clear();
+    // ,"unload":JSON.stringify($allunload),"clickbtngenerate":JSON.stringify($allclick),"clickAlphabtn":JSON.stringify($alpha)
+ }
+ 
+ 
+});
+        
+        
+        },10000);
+
+            //load*******************************************
+
+            window.addEventListener("load",function(e)
+            {
+                    var load=new objects("Load",e.type,e.target,new Date());
+              if(localStorage.getItem("load")==null)
+                  {  
+                      $arr.push(load);
+                      window.localStorage.setItem("load",JSON.stringify($arr));
+                  }
+                else
+                  {
+                    $arr=JSON.parse(localStorage.getItem("load"));
+                    $arr.push(load);
+                    window.localStorage.setItem("load",JSON.stringify($arr));
+                  }
+            });
+
+            //unload***********************************************
+              
+              window.addEventListener("unload",function(e)
+              {
+                       var unload=new objects("Unload",e.type,e.target,new Date());
+                  if(localStorage.getItem("unload")==null)
+                      {       
+                              $arr2.push(unload);
+                              window.localStorage.setItem("unload",JSON.stringify($arr2));
+                      }
+                  else
+                      {
+                         $arr2=JSON.parse(localStorage.getItem("unload"));
+                        $arr2.push(unload);
+                        window.localStorage.setItem("unload",JSON.stringify($arr2));
+                      }
+        
+                });
+       //Generate Button************************************************************
+                var alpha=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+                var names=["Apple","Boy","Cat","Dog","Elephant","Fish","Girl","Hours","Ice_cream","Jam","Kangaroo","Lion","Monky","Nurse","Oil","Panda","Queen","Rabbit","School","Tree","Umbrella","Vagetabls","Wolf","Xylophone","Yoyo","Zombies"];
+                var images=["a.jpeg","b.jpeg","c.jpeg","d.jpg","e.jpg","f.jpg","g.jpg","h.jpg","i.jpg","j.jpg","k.jpg","l.jpg","m.jpg","n.jpg","o.jpg","p.jpg","q.jpg","r.jpg","s.jpg","t.jpg","u.jpg","v.png","w.jpg","x.jpg","y.jpg","z.jpg"];
+                var dv=document.getElementById("show");
+                var inp=document.getElementById("in");
+                var btn=document.getElementById("btn");
+                var dv3=document.getElementById("showimage");
+                var x=Math.floor(Math.random()*(26));
+                var img=null;
+              
+                var count=1;
+                var  p_img=null;
+                var  p_text=null;
+              
+     btn.addEventListener("click",function(e){
+      $("#table").text("");
+                if(img!=null&&p_img!=null&& p_text!=null)
+                        {
+                            dv3.removeChild(img);
+                            p_img.removeChild(p_text);
+                            dv3.removeChild(p_img);
+                            img=null;
+                            p_img=null;
+                            p_text=null;
+                        }	
+                  dv.innerHTML=" ";
+            var alphasign=[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
+              
+                    if(parseInt(inp.value)>26||parseInt(inp.value)<0){
+                        
+                        alert("Number must be between 1 to 26");
+                        window.location.reload(true);
+                    }
+                    else{
+                       var btngenerate=new objects(e.target.textContent,e.type,e.target,new Date());
+			   
+			   if(localStorage.getItem("clickbtngenerate")==null)
+              {  
+                  $arr3.push(btngenerate);                  
+                   window.localStorage.setItem("clickbtngenerate",JSON.stringify($arr3));
+              }
+            else
+              {
+                
+                $arr3=JSON.parse(localStorage.getItem("clickbtngenerate"));
+                $arr3.push(btngenerate);
+                window.localStorage.setItem("clickbtngenerate",JSON.stringify($arr3));
+                
+              }
+			     for(var i=0;i<parseInt(inp.value);i++)
+                 {
+					//to handel repeat alpha
+                 while(true)
+                      {
+                       if(alphasign[x]==-1)
+                         {
+                            
+                           alphasign[x]++;
+                           break;
+                         }
+                           else
+                           {
+                              var x=Math.floor(Math.random()*(26));
+                           }
+                       }
+					   if(i==13)
+					   {
+						dv.innerHtml="<br><br>";
+					   }
+                 var d=[];
+                    d[i]=document.createElement("button");
+					
+                    var text=document.createTextNode(alpha[x]);
+                    d[i].appendChild(text);
+                    d[i].setAttribute("class","btn");
+               dv.appendChild(d[i]);
+               d[i].addEventListener("click",function(e){
+                $("#table").text("");
+
+                var alpha_btn=new objects(e.target.textContent,e.type,e.target,new Date());
+
+          if(localStorage.getItem("clickAlphabtn")==null)
+                {
+                      $arr4.push(alpha_btn);                
+                      window.localStorage.setItem("clickAlphabtn",JSON.stringify($arr4));
+                }
+                
+              else
+                {
+                  
+                  $arr4=JSON.parse(localStorage.getItem("clickAlphabtn"));
+                  $arr4.push(alpha_btn);
+                  window.localStorage.setItem("clickAlphabtn",JSON.stringify($arr4));
+                  
+                }
+                   if(img!=null&&p_img!=null&& p_text!=null)
+                        {
+                            dv3.removeChild(img);
+                            p_img.removeChild(p_text);
+                            dv3.removeChild(p_img);
+                            img=null;
+                            p_img=null;
+                            p_text=null;
+                        }
+                       img= document.createElement("img");
+                       p_img= document.createElement("p");
+                            for(var j=0;j<26;j++)
+                            {
+                                if(e.target.textContent==alpha[j]){
+                                    img.src=images[j];
+                                     p_text=document.createTextNode(names[j]);
+									 
+									 
+                                    break;
+                                }
+                            }
+                         
+                          p_img.appendChild(p_text);
+                          dv3.appendChild(p_img);
+						   dv3.appendChild(img);
+                });} }      }    );
+               
+            </script>
+    </body>
+</html>
